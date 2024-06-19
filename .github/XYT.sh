@@ -16,7 +16,7 @@ pbdev(){
 Vsion2="$(Xem https://github.com/$1/releases | grep -om1 ''$1'/releases/tag/.*dev' | cut -d '"' -f1 | sed -e 's|dev|zzz|g' -e 's|v||g' -e 's|zzz|dev|g' -e 's|\"||g')"
 Taive "https://github.com/$1/releases/download/v${Vsion2##*/}/$2-${Vsion2##*/}$4.$3" "lib/$2.$3"; }
 # Tải json
-vjson="$(Xem https://github.com/anddea/revanced-patches | grep -om1 'anddea/revanced-patches/releases/tag/.*\"' | sed -e 's|dev|zzz|g' -e 's|v||g' -e 's|zzz|dev|g' -e 's|\"||g')"
+vjson="$(Xem https://github.com/inotia00/revanced-patches | grep -om1 'inotia00/revanced-patches/releases/tag/.*\"' | sed -e 's|dev|zzz|g' -e 's|v||g' -e 's|zzz|dev|g' -e 's|\"||g')"
 
 # tải apk
 TaiYT(){
@@ -32,12 +32,12 @@ echo "Link: $uak2"
 
 # lấy dữ liệu phiên bản mặc định
 echo "- Patches YouTube mới nhất..."
-Vidon="$(Xem "https://github.com/anddea/revanced-patches/releases/download/v${vjson##*/}/patches.json" | jq -r .[1].compatiblePackages[0].versions[] | tac | head -n1)"
+Vidon="$(Xem "https://github.com/inotia00/revanced-patches/releases/download/v${vjson##*/}/patches.json" | jq -r .[1].compatiblePackages[0].versions[] | tac | head -n1)"
 
 # là amoled
 [ "$AMOLED" == 'true' ] && amoled2='-Amoled'
 [ "$AMOLED" == 'true' ] || theme='-e Theme'
-[ "$TYPE" == 'true' ] && Mro='-e "MicroG support"'
+[ "$TYPE" == 'true' ] && Mro='-e "GmsCore support"'
 
 # Xoá lib dựa vào abi
 if [ "$DEVICE" == "arm64-v8a" ];then
@@ -75,9 +75,9 @@ Upenv VER "$VER"
 
 if [[ "$VERSION" == 'Autu' ]] && [[ "$(Xem https://github.com/$GITHUB_REPOSITORY/releases/download/Up/Up-X${V}notes.json | grep -cm1 "${VER//./}")" == 1 ]];then
 echo "! Là phiên bản mới nhất."
-gh run cancel $GITHUB_RUN_ID
-sleep 10
-exit 0
+#gh run cancel $GITHUB_RUN_ID
+#sleep 10
+#exit 0
 fi
 
 echo
@@ -87,14 +87,14 @@ if [ "$DEV" == "Develop" ];then
 echo "  Dùng Dev"
 echo
 pbdev inotia00/revanced-cli revanced-cli jar -all
-pbdev anddea/revanced-patches revanced-patches jar
-pbdev anddea/revanced-integrations revanced-integrations apk
+pbdev inotia00/revanced-patches revanced-patches jar
+pbdev inotia00/revanced-integrations revanced-integrations apk
 else
 echo "  Dùng Sta"
 echo
 pbsta inotia00/revanced-cli revanced-cli jar -all
-pbsta anddea/revanced-patches revanced-patches jar
-pbsta anddea/revanced-integrations revanced-integrations apk
+pbsta inotia00/revanced-patches revanced-patches jar
+pbsta inotia00/revanced-integrations revanced-integrations apk
 fi
 
 
@@ -179,9 +179,10 @@ fi
 
 # MOD YouTube 
 (
+#java -Djava.io.tmpdir=$HOME -jar $lib1 patch 2>&1
 
 echo "▼ Bắt đầu quá trình xây dựng..."
-eval "java -Djava.io.tmpdir=$HOME -jar $lib1 patch -b $lib2 -m $lib3 apk/YouTube.apk -o YT.apk "$Tof $Ton $Mro $theme $feature"" >> Log2.txt 2>> Log2.txt
+eval "java -Djava.io.tmpdir=$HOME -jar $lib1 patch -b $lib2 -m $lib3 apk/YouTube.apk -o YT.apk "$Tof $Ton $Mro $theme $feature" --unsigned" >> Log2.txt 2>&1
 sed '/WARNING: warn: removing resource/d' Log2.txt
 echo '- Quá trình xây dựng apk xong.' | tee 2.txt
 grep 'SEVERE:' Log2.txt | sed 's|failed:|failed|g' > Log.txt
@@ -222,7 +223,7 @@ updateJson=https://github.com/'$GITHUB_REPOSITORY'/releases/download/Up/Up-X'$V$
 echo '{
 "version": "'$VER'",
 "versionCode": "'${VER//./}'",
-"zipUrl": "https://github.com/'$GITHUB_REPOSITORY'/releases/download/X'$V$VER'/XYT-Magisk-'$VER'-'$ach$amoled2'.Zip",
+"zipUrl": "https://github.com/'$GITHUB_REPOSITORY'/releases/download/X'$V$VER'/XYT-Hybrid-'$VER'-'$ach$amoled2'.Zip",
 "changelog": "https://github.com/'$GITHUB_REPOSITORY'/releases/download/Up/Up-X'$V'notes.json"
 }' > "Up-X$V$ach$amoled2.json"
 
@@ -230,6 +231,6 @@ echo -e 'Update '$(date)' \nYouTube: '$VER' \nVersion: '${VER//./}'\nAuto by kak
 
 # Tạo module magisk
 cd $HOME/.github/Modun
-zip -qr $HOME/Up/XYT-Magisk-$VER-$ach$amoled2.zip *
+zip -qr $HOME/Up/XYT-Hybrid-$VER-$ach$amoled2.zip *
 cd $HOME
 ls Up

@@ -1,11 +1,17 @@
 ### Note: This fork is for my personal use only.
 # YT-RE - YT-EXT 
 [![YT-RE](https://github.com/Zenlua/AT-YT/actions/workflows/Install.yml/badge.svg)](https://github.com/Zenlua/AT-YT/actions/workflows/Install.yml) [![YT-EXT](https://github.com/Zenlua/AT-YT/actions/workflows/XInstall.yml/badge.svg)](https://github.com/Zenlua/AT-YT/actions/workflows/XInstall.yml)
++ Are two different types of YouTube mods, pay attention to the names when downloading
+
 + Build, Edit: is the manual build version
 
-+ Auto: is the version that automatically builds every day.
++ Hybrid for root(magisk, etc) management software, and flash Twrp(need rw)
 
-+ Ksu and magisk support
+**Downloads**
+---
+
+> [!Tip]
+> All versions: [Release](https://github.com/Zenlua/AT-YT/releases)
 
 **Revanced CLI**
 ---
@@ -16,7 +22,7 @@
 
 - See the version that Revanced they support for the latest build.
 
-   > [Revanced](https://github.com/revanced/revanced-patches) | [anddea](https://github.com/anddea/revanced-patches)
+   > [Revanced](https://github.com/revanced/revanced-patches) | [inotia00](https://github.com/inotia00/revanced-patches)
 
 - Additional app for the no-root version
 
@@ -25,13 +31,6 @@
 - The latest Youtube version
 
    > [Apkmirror](https://www.apkmirror.com/apk/google-inc/youtube/)
-
-**Build YouTube**
----
-
-- You can build your own version with models suitable for your machine. 
-
-   > [Instructions](https://github.com/Zenlua/AT-YT/blob/Vip/.github/Tools/Auto.md)
 
 **Add-on Download**
 ---

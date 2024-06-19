@@ -11,5 +11,8 @@ Tof='
 -e "Custom branding icon Revancify blue"
 -e "Custom branding icon Revancify Blue"
 -e "Custom branding name YouTube"
+-e "Custom branding icon YouTube"
+-e "Custom branding name for YouTube"
+-e "Custom branding icon for YouTube"
 '
 
